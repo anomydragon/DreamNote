@@ -10,6 +10,9 @@ workspace "DreamNote"
 
 OutputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+
+libdirs {os.findlib("glfw")}
+
 project "DreamRenderer"
     location "DreamRenderer"
     kind "SharedLib"
@@ -23,6 +26,21 @@ project "DreamRenderer"
     {
         "DreamRenderer/src/*.h",
         "DreamRenderer/src/*.cpp"
+    }
+
+    defines
+    {
+        "GLFW_INCLUDE_NONE"
+    }
+
+    includedirs
+    {
+        "DreamRenderer/src"
+    }
+
+    links
+    {
+        "glfw"
     }
 
     filter "configurations:Debug"
@@ -48,8 +66,8 @@ project "DreamNote"
 
     files
     {
-        "**.h",
-        "**.cpp"
+        "Notes/src/**.h",
+        "Notes/src/**.cpp"
     }
 
     includedirs
@@ -59,7 +77,7 @@ project "DreamNote"
 
     links
     {
-        DreamRenderer
+        "DreamRenderer"
     }
 
     filter "configurations:Debug"

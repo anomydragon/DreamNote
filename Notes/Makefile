@@ -30,9 +30,9 @@ ifeq ($(config),debug)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LIBS += ../build-obj/Debug-linux-x86_64/DreamRenderer/libDreamRenderer.so
+  LDDEPS += ../build-obj/Debug-linux-x86_64/DreamRenderer/libDreamRenderer.so
+  ALL_LDFLAGS += $(LDFLAGS) -L/lib64 -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../../../build-obj/Debug-linux-x86_64/DreamRenderer' -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -65,9 +65,9 @@ ifeq ($(config),release)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LIBS += ../build-obj/Release-linux-x86_64/DreamRenderer/libDreamRenderer.so
+  LDDEPS += ../build-obj/Release-linux-x86_64/DreamRenderer/libDreamRenderer.so
+  ALL_LDFLAGS += $(LDFLAGS) -L/lib64 -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../../../build-obj/Release-linux-x86_64/DreamRenderer' -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -100,9 +100,9 @@ ifeq ($(config),dist)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LIBS += ../build-obj/Dist-linux-x86_64/DreamRenderer/libDreamRenderer.so
+  LDDEPS += ../build-obj/Dist-linux-x86_64/DreamRenderer/libDreamRenderer.so
+  ALL_LDFLAGS += $(LDFLAGS) -L/lib64 -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../../../build-obj/Dist-linux-x86_64/DreamRenderer' -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -116,7 +116,6 @@ all: prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/DreamApplication.o \
 	$(OBJDIR)/main.o \
 
 RESOURCES := \
@@ -176,9 +175,6 @@ else
 $(OBJECTS): | $(OBJDIR)
 endif
 
-$(OBJDIR)/DreamApplication.o: ../DreamRenderer/src/DreamApplication.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

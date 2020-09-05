@@ -1,0 +1,3 @@
+[submodule "DreamRenderer/3rdParty/glfw"]
+	path = DreamRenderer/3rdParty/glfw
+	url = https://github.com/glfw/glfw.git
