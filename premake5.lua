@@ -12,6 +12,7 @@ OutputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 
 libdirs {os.findlib("glfw")}
+libdirs {os.findlib("gl")}
 
 project "DreamRenderer"
     location "DreamRenderer"
@@ -24,14 +25,14 @@ project "DreamRenderer"
 
     files
     {
-        "DreamRenderer/src/*.h",
-        "DreamRenderer/src/*.cpp"
+        "DreamRenderer/src/**.h",
+        "DreamRenderer/src/**.cpp"
     }
 
-    defines
-    {
-        "GLFW_INCLUDE_NONE"
-    }
+    --defines
+    --{
+    --    "GLFW_INCLUDE_NONE"
+    --}
 
     includedirs
     {
@@ -40,7 +41,8 @@ project "DreamRenderer"
 
     links
     {
-        "glfw"
+        "glfw",
+        "gl"
     }
 
     filter "configurations:Debug"

@@ -1,5 +1,5 @@
 #include <Dream.h>
-#include <EntryPoint.h>
+#include <Core/EntryPoint.h>
 
 class DreamNotes : public Dream::Application
 {

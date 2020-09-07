@@ -1,7 +1,9 @@
 #ifndef DREAMAPPLICATION_H
 #define DREAMAPPLICATION_H
 #include "DreamBase.h"
+#include "Window/Window.h"
 #include <GLFW/glfw3.h>
+#include <memory>
 
 int main(int argc, char **argv);
 
@@ -13,9 +15,11 @@ namespace Dream
         Application();
         virtual ~Application();
     private:
-        GLFWwindow *M_Window;
+        std::unique_ptr<Window> M_Window;
+        bool Running = true;
     private:
         static Application *S_Instance;
+        
         friend int ::main(int argc, char **argv);
     };
 
