@@ -1,7 +1,7 @@
 #ifndef DREAMAPPLICATION_H
 #define DREAMAPPLICATION_H
 #include "DreamBase.h"
-#include "Window/Window.h"
+#include "../Window/Window.h"
 #include <GLFW/glfw3.h>
 #include <memory>
 

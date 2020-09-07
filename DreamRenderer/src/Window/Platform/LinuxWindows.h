@@ -1,6 +1,6 @@
 #ifndef LINUXWINDOWS_H
 #define LINUXWINDOWS_H
-#include "Window/Window.h"
+#include "../Window.h"
 #include <GLFW/glfw3.h>
 #include <string>
 

@@ -1,5 +1,6 @@
 #include "LinuxWindows.h"
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
 #include <cstdint>
 #include <stdexcept>
 
@@ -36,9 +37,12 @@ namespace Dream
 
         M_Window = glfwCreateWindow((int)WProps.Width, (int)WProps.Height, WProps.Title.c_str(), nullptr, nullptr);
         ++L_GLFWWindowCount;
-        
+
         glfwMakeContextCurrent(M_Window);
         glfwSetWindowUserPointer(M_Window, &M_WData);
+
+        if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            throw std::runtime_error("Failed to load Glad");
 
         EnableVSync(true);
     }
@@ -54,6 +58,7 @@ namespace Dream
 
     void LinuxWindows::OnUpdate()
     {
+        glfwSwapBuffers(M_Window);
         glfwPollEvents();
     }
 

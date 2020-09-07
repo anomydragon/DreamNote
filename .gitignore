@@ -10,7 +10,8 @@
 # Generated files #
 ###################
 .clangd/
-build/
-build-obj/
-MakeFile
+**/build/
+**/build-obj/
+**/Makefile
+**/*.make
 compile_commands.json

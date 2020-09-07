@@ -1,6 +1,6 @@
 #include "DreamCore.h"
 #include "Window/Window.h"
-#include <GL/gl.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <memory>
 

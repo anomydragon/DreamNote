@@ -1,5 +1,6 @@
 workspace "DreamNote"
     architecture "x86_64"
+    startproject "DreamNote"
 
     configurations
     {
@@ -10,9 +11,8 @@ workspace "DreamNote"
 
 OutputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-
-libdirs {os.findlib("glfw")}
-libdirs {os.findlib("gl")}
+include "DreamRenderer/3rdParty/GLFW.lua"
+include "DreamRenderer/3rdParty/GLAD.lua"
 
 project "DreamRenderer"
     location "DreamRenderer"
@@ -21,7 +21,7 @@ project "DreamRenderer"
     staticruntime "On"
 
     targetdir ("build/" .. OutputDir .. "/%{prj.name}")
-    targetdir ("build-obj/" .. OutputDir .. "/%{prj.name}")
+    objdir ("build-obj/" .. OutputDir .. "/%{prj.name}")
 
     files
     {
@@ -29,20 +29,23 @@ project "DreamRenderer"
         "DreamRenderer/src/**.cpp"
     }
 
-    --defines
-    --{
-    --    "GLFW_INCLUDE_NONE"
-    --}
+    defines
+    {
+        "GLFW_INCLUDE_NONE"
+    }
 
     includedirs
     {
-        "DreamRenderer/src"
+        "DreamRenderer/src",
+        "DreamRenderer/3rdParty/GLAD/include"
     }
 
     links
     {
-        "glfw",
-        "gl"
+        "GLFW",
+        "GLAD",
+        "dl",
+        "pthread"
     }
 
     filter "configurations:Debug"
@@ -74,6 +77,7 @@ project "DreamNote"
 
     includedirs
     {
+        "Notes/src",
         "DreamRenderer/src"
     }
 
